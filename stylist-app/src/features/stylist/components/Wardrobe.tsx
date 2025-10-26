@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import './Wardrobe.css';
 import OutfitRecommendationModal from './OutfitRecommendationModal';
+import Avatar3D from './Avatar3D';
 
 interface WardrobeItem {
   id: string;
@@ -118,22 +119,9 @@ function Wardrobe({ isChatVisible, onOutfitPanelVisibilityChange }: WardrobeProp
       {/* Model */}
       <div className={`model-area ${isChatVisible ? 'chat-visible' : ''} ${showOutfitPanel ? 'outfit-visible' : ''}`}>
         <div className="model-container">
-          <div className="model-silhouette">
-            {/* Head */}
-            <div className="model-head"></div>
-            
-            {/* Outfit Display - Today's Recommendation */}
-            <div className="model-outfit">
-              {/* Top */}
-              <div className="outfit-top" style={{ backgroundColor: '#E8D5C4' }}>
-                <div className="top-pattern"></div>
-              </div>
-              
-              {/* Bottom */}
-              <div className="outfit-bottom" style={{ backgroundColor: '#4A4A4A' }}>
-                <div className="bottom-pattern"></div>
-              </div>
-            </div>
+          {/* 3D Avatar */}
+          <div className="model-3d-wrapper">
+            <Avatar3D modelPath="/td-1.glb" />
           </div>
 
           {/* Outfit Details Badge - Now opens modal */}
@@ -141,7 +129,7 @@ function Wardrobe({ isChatVisible, onOutfitPanelVisibilityChange }: WardrobeProp
             <div className="badge-icon">👔</div>
             <div className="badge-text">
               <div className="badge-title">Smart Casual</div>
-              <div className="badge-subtitle">View Details</div>
+              <div className="badge-subtitle">Drag to rotate • Scroll to zoom</div>
             </div>
             <div className="badge-arrow">›</div>
           </div>
