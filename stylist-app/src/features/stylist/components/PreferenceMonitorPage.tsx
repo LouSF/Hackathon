@@ -150,7 +150,7 @@ function PreferenceMonitorPage() {
   return (
     <div className="preference-monitor-page">
       <div className="preference-header">
-        <h1 className="page-title">偏好监控</h1>
+        <h1 className="page-title">偏好设置</h1>
         <p className="page-subtitle">个性化您的时尚推荐</p>
       </div>
 

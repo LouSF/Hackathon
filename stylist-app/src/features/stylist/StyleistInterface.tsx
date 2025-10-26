@@ -42,7 +42,7 @@ function StyleistInterface() {
     { name: 'Home', icon: '🏠' },
     { name: '交友', icon: '👥' },
     { name: '品牌价格监控', icon: '💰' },
-    { name: '偏好监控', icon: '⭐' },
+    { name: '偏好设置', icon: '⭐' },
   ];
 
   // Simulate weather data update
@@ -172,7 +172,7 @@ function StyleistInterface() {
           <SocialPage />
         ) : currentPage === '品牌价格监控' ? (
           <BrandMonitorPage />
-        ) : currentPage === '偏好监控' ? (
+        ) : currentPage === '偏好设置' ? (
           <PreferenceMonitorPage />
         ) : null}
       </main>
