@@ -204,9 +204,9 @@
   box-shadow: 0 6px 24px rgba(107, 83, 68, 0.5);
 }
 
-/* Random Model Button - Bottom Left */
+/* Random Model Button - Bottom Left, aligned with chat button */
 .random-model-btn {
-  position: absolute;
+  position: fixed;
   bottom: 24px;
   left: 24px;
   width: 56px;
@@ -220,7 +220,7 @@
   align-items: center;
   justify-content: center;
   box-shadow: 0 4px 16px rgba(16, 185, 129, 0.4);
-  z-index: 10;
+  z-index: 1000;
   font-size: 24px;
   transition: all 0.3s ease;
   animation: popIn 0.3s ease-out;
@@ -545,8 +545,8 @@
     width: 50px;
     height: 50px;
     font-size: 22px;
-    bottom: 20px;
-    left: 20px;
+    bottom: 16px;
+    left: 16px;
   }
 }
 
@@ -587,8 +587,8 @@
     width: 48px;
     height: 48px;
     font-size: 20px;
-    bottom: 16px;
-    left: 16px;
+    bottom: 12px;
+    left: 12px;
   }
 
   .outfit-panel-close-btn {
