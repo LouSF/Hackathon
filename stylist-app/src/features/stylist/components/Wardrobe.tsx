@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 import './Wardrobe.css';
 import OutfitRecommendationModal from './OutfitRecommendationModal';
 
@@ -11,6 +11,14 @@ interface WardrobeItem {
   color: string;
 }
 
+interface OutfitItem {
+  id: string;
+  name: string;
+  category: string;
+  color: string;
+  rating: number;
+}
+
 const wardrobeItems: WardrobeItem[] = [
   { id: '1', name: 'JACKET ZONE', type: 'clothing', position: { top: '12%', left: '8%' }, color: '#8B7355' },
   { id: '2', name: 'KNITWEAR SHELF', type: 'clothing', position: { top: '28%', left: '68%' }, color: '#D4A5A5' },
@@ -18,9 +26,18 @@ const wardrobeItems: WardrobeItem[] = [
   { id: '4', name: 'TROUSER RACK', type: 'clothing', position: { top: '55%', left: '65%' }, color: '#6B5344' },
 ];
 
+const outfitItems: OutfitItem[] = [
+  { id: '1', name: 'Beige Linen Shirt', category: 'Top', color: '#E8D5C4', rating: 5 },
+  { id: '2', name: 'Charcoal Trousers', category: 'Bottom', color: '#4A4A4A', rating: 5 },
+  { id: '3', name: 'Brown Leather Belt', category: 'Accessory', color: '#8B6F47', rating: 4 },
+  { id: '4', name: 'White Sneakers', category: 'Footwear', color: '#F5F5F5', rating: 4 },
+];
+
 function Wardrobe() {
   const [selectedItem, setSelectedItem] = useState<string | null>(null);
   const [showRecommendationModal, setShowRecommendationModal] = useState(false);
+  const [hoveredOutfitItem, setHoveredOutfitItem] = useState<string | null>(null);
+  const [showOutfitPanel, setShowOutfitPanel] = useState(true);
 
   const handleLabelClick = (itemId: string) => {
     setSelectedItem(itemId);
@@ -34,6 +51,57 @@ function Wardrobe() {
 
   return (
     <div className="wardrobe-section">
+      {/* Outfit Recommendation Background */}
+      {showOutfitPanel && (
+        <div className="outfit-background">
+          <div className="outfit-background-header">
+            <div className="recommendation-label">DAILY OUTFIT RECOMMENDATION</div>
+            <button 
+              className="outfit-panel-close-btn"
+              onClick={() => setShowOutfitPanel(false)}
+              title="Hide Panel"
+            >
+              ✕
+            </button>
+          </div>
+        
+        <div className="outfit-background-items">
+          {outfitItems.map((item) => (
+            <div
+              key={item.id}
+              className={`outfit-bg-item ${hoveredOutfitItem === item.id ? 'hovered' : ''}`}
+              onMouseEnter={() => setHoveredOutfitItem(item.id)}
+              onMouseLeave={() => setHoveredOutfitItem(null)}
+            >
+              <div className="item-color-swatch" style={{ backgroundColor: item.color }}></div>
+              <div className="item-details">
+                <div className="item-name">{item.name}</div>
+                <div className="item-category">{item.category}</div>
+              </div>
+              <div className="item-rating">
+                {Array.from({ length: 5 }).map((_, idx) => (
+                  <span key={idx} className={`star ${idx < item.rating ? 'filled' : 'empty'}`}>
+                    ★
+                  </span>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+      )}
+
+      {/* Show Outfit Panel Button when hidden */}
+      {!showOutfitPanel && (
+        <button 
+          className="show-outfit-panel-btn"
+          onClick={() => setShowOutfitPanel(true)}
+          title="Show Daily Outfit"
+        >
+          👔
+        </button>
+      )}
+
       {/* Blurred Background */}
       <div className="wardrobe-background">
         <div className="wardrobe-item-bg wardrobe-item-bg-1"></div>
@@ -63,12 +131,12 @@ function Wardrobe() {
             </div>
           </div>
 
-          {/* Outfit Details Badge */}
+          {/* Outfit Details Badge - Now opens modal */}
           <div className="outfit-badge" onClick={() => handleLabelClick('outfit')}>
             <div className="badge-icon">👔</div>
             <div className="badge-text">
               <div className="badge-title">Smart Casual</div>
-              <div className="badge-subtitle">Perfect for Today</div>
+              <div className="badge-subtitle">View Details</div>
             </div>
             <div className="badge-arrow">›</div>
           </div>

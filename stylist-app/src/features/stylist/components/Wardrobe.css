@@ -2,8 +2,193 @@
 .wardrobe-section {
   position: relative;
   width: 100%;
+  height: 100%;
+  min-height: 400px;
   padding: 32px;
   background: linear-gradient(135deg, rgba(220, 200, 170, 0.15) 0%, rgba(200, 180, 150, 0.1) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: auto;
+}
+
+.outfit-background {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  width: 380px;
+  max-height: calc(100% - 48px);
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  overflow: hidden;
+}
+
+.outfit-background-header {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 12px;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.08);
+}
+
+.recommendation-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: #333;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  flex: 1;
+  text-align: center;
+}
+
+.outfit-panel-close-btn {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.05);
+  border: none;
+  color: #666;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  font-size: 14px;
+  font-weight: bold;
+  flex-shrink: 0;
+}
+
+.outfit-panel-close-btn:hover {
+  background: rgba(0, 0, 0, 0.1);
+  color: #333;
+  transform: scale(1.1);
+}
+
+.outfit-background-items {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  overflow-y: auto;
+  flex: 1;
+  padding-right: 4px;
+}
+
+.outfit-background-items::-webkit-scrollbar {
+  width: 4px;
+}
+
+.outfit-background-items::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.outfit-background-items::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 2px;
+}
+
+.outfit-bg-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  transition: all 0.2s ease;
+  cursor: pointer;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+}
+
+.outfit-bg-item:hover {
+  background: rgba(255, 255, 255, 1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transform: translateX(4px);
+  border-color: rgba(0, 0, 0, 0.12);
+}
+
+.outfit-bg-item.hovered {
+  border-color: rgba(0, 0, 0, 0.15);
+}
+
+.item-color-swatch {
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
+  flex-shrink: 0;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+  border: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.item-details {
+  flex: 1;
+  min-width: 0;
+}
+
+.item-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: #333;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.item-category {
+  font-size: 11px;
+  color: #999;
+  margin-top: 2px;
+}
+
+.item-rating {
+  display: flex;
+  gap: 3px;
+  font-size: 12px;
+  flex-shrink: 0;
+}
+
+.star {
+  color: #ddd;
+  transition: color 0.2s ease;
+  line-height: 1;
+}
+
+.star.filled {
+  color: #FFD700;
+}
+
+.show-outfit-panel-btn {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #8B7355 0%, #6B5344 100%);
+  border: none;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 16px rgba(107, 83, 68, 0.4);
+  z-index: 10;
+  font-size: 22px;
+  transition: all 0.3s ease;
+  animation: popIn 0.3s ease-out;
+}
+
+.show-outfit-panel-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 24px rgba(107, 83, 68, 0.5);
 }
 
 .wardrobe-background {
@@ -243,9 +428,60 @@
   }
 }
 
+@keyframes popIn {
+  from {
+    opacity: 0;
+    transform: scale(0);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
 @media (max-width: 768px) {
   .wardrobe-section {
     padding: 24px;
+  }
+
+  .outfit-background {
+    top: 16px;
+    right: 16px;
+    width: 320px;
+    max-height: calc(100% - 32px);
+    padding: 16px;
+  }
+
+  .show-outfit-panel-btn {
+    top: 16px;
+    right: 16px;
+    width: 44px;
+    height: 44px;
+    font-size: 20px;
+  }
+
+  .outfit-panel-close-btn {
+    width: 22px;
+    height: 22px;
+    font-size: 13px;
+  }
+
+  .recommendation-label {
+    font-size: 11px;
+  }
+
+  .outfit-bg-item {
+    padding: 10px 12px;
+    gap: 10px;
+  }
+
+  .item-color-swatch {
+    width: 38px;
+    height: 38px;
+  }
+
+  .item-name {
+    font-size: 12px;
   }
 
   .model-silhouette {
@@ -294,6 +530,59 @@
 @media (max-width: 480px) {
   .wardrobe-section {
     padding: 16px;
+  }
+
+  .outfit-background {
+    top: 12px;
+    right: 12px;
+    left: 12px;
+    width: auto;
+    max-height: 280px;
+    padding: 14px;
+  }
+
+  .show-outfit-panel-btn {
+    top: 12px;
+    right: 12px;
+    width: 42px;
+    height: 42px;
+    font-size: 18px;
+  }
+
+  .outfit-panel-close-btn {
+    width: 20px;
+    height: 20px;
+    font-size: 12px;
+  }
+
+  .outfit-background-header {
+    padding-bottom: 10px;
+  }
+
+  .recommendation-label {
+    font-size: 10px;
+  }
+
+  .outfit-bg-item {
+    padding: 8px 10px;
+    gap: 8px;
+  }
+
+  .item-color-swatch {
+    width: 36px;
+    height: 36px;
+  }
+
+  .item-name {
+    font-size: 11px;
+  }
+
+  .item-category {
+    font-size: 10px;
+  }
+
+  .item-rating {
+    font-size: 11px;
   }
 
   .model-silhouette {

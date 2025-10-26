@@ -2,35 +2,37 @@
 .chat-input-wrapper {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
+  padding: 0 4px;
 }
 
 .quick-suggestions {
   display: flex;
-  gap: 8px;
+  gap: 6px;
   flex-wrap: wrap;
   animation: slideUp 0.2s ease-out;
+  padding: 0 4px;
 }
 
 .suggestion-btn {
-  padding: 8px 14px;
-  background: rgba(240, 240, 240, 0.9);
-  border: 1px solid rgba(0, 0, 0, 0.12);
-  border-radius: 20px;
+  padding: 6px 12px;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
   font-size: 12px;
   font-weight: 500;
-  color: #333;
+  color: #4b5563;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.15s ease;
   white-space: nowrap;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
 .suggestion-btn:hover:not(:disabled) {
-  background: rgba(220, 220, 220, 0.95);
-  border-color: rgba(0, 0, 0, 0.18);
-  transform: translateY(-2px);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  background: #f9fafb;
+  border-color: #d1d5db;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
 }
 
 .suggestion-btn:disabled {
@@ -40,19 +42,21 @@
 
 .chat-input-container {
   display: flex;
-  gap: 10px;
+  gap: 8px;
   align-items: center;
-  background: rgba(255, 255, 255, 0.95);
-  border-radius: 28px;
-  padding: 10px 14px;
-  border: 1px solid rgba(0, 0, 0, 0.15);
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 8px 12px;
+  border: 2px solid #e5e7eb;
   transition: all 0.2s ease;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+  max-width: 600px;
+  margin: 0 auto;
 }
 
 .chat-input-container:focus-within {
-  border-color: rgba(0, 0, 0, 0.25);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  border-color: #3b82f6;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15), 0 2px 4px rgba(59, 130, 246, 0.1);
 }
 
 .chat-input {
@@ -60,15 +64,16 @@
   border: none;
   outline: none;
   background: transparent;
-  font-size: 13px;
-  color: #333;
+  font-size: 14px;
+  color: #1f2937;
   font-family: inherit;
-  padding: 8px 4px;
+  padding: 6px 8px;
+  min-height: 24px;
 }
 
 .chat-input::placeholder {
-  color: #aaa;
-  font-size: 13px;
+  color: #9ca3af;
+  font-size: 14px;
 }
 
 .chat-input:disabled {
@@ -76,10 +81,10 @@
 }
 
 .send-button {
-  width: 36px;
-  height: 36px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #333 0%, #1a1a1a 100%);
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
   border: none;
   cursor: pointer;
   display: flex;
@@ -88,15 +93,15 @@
   transition: all 0.2s ease;
   flex-shrink: 0;
   color: #fff;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: bold;
-  box-shadow: 0 2px 8px rgba(51, 51, 51, 0.2);
+  box-shadow: 0 2px 6px rgba(59, 130, 246, 0.3);
 }
 
 .send-button:hover:not(:disabled) {
-  background: linear-gradient(135deg, #1a1a1a 0%, #000 100%);
-  box-shadow: 0 4px 12px rgba(51, 51, 51, 0.3);
-  transform: translateY(-2px);
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  box-shadow: 0 4px 10px rgba(59, 130, 246, 0.4);
+  transform: scale(1.05);
 }
 
 .send-button:active:not(:disabled) {
@@ -104,13 +109,15 @@
 }
 
 .send-button:disabled {
-  opacity: 0.5;
+  opacity: 0.4;
   cursor: not-allowed;
+  background: #d1d5db;
 }
 
 .send-icon {
   display: inline-block;
   line-height: 1;
+  transform: rotate(-45deg);
 }
 
 .loading-spinner {
@@ -155,51 +162,55 @@
   }
 
   .chat-input-container {
-    padding: 8px 12px;
+    padding: 7px 10px;
     gap: 8px;
+    max-width: 100%;
   }
 
   .chat-input {
-    font-size: 12px;
-    padding: 6px 3px;
+    font-size: 13px;
+    padding: 5px 6px;
   }
 
   .chat-input::placeholder {
-    font-size: 12px;
+    font-size: 13px;
   }
 
   .send-button {
-    width: 32px;
-    height: 32px;
+    width: 30px;
+    height: 30px;
+    font-size: 16px;
   }
 }
 
 @media (max-width: 480px) {
   .quick-suggestions {
-    gap: 6px;
+    gap: 5px;
   }
 
   .suggestion-btn {
-    padding: 6px 10px;
-    font-size: 10px;
-  }
-
-  .chat-input-container {
-    padding: 8px 10px;
-    gap: 6px;
-  }
-
-  .chat-input {
-    font-size: 12px;
-  }
-
-  .chat-input::placeholder {
+    padding: 5px 10px;
     font-size: 11px;
   }
 
+  .chat-input-container {
+    padding: 6px 10px;
+    gap: 6px;
+    max-width: 100%;
+  }
+
+  .chat-input {
+    font-size: 13px;
+    padding: 5px 6px;
+  }
+
+  .chat-input::placeholder {
+    font-size: 13px;
+  }
+
   .send-button {
-    width: 32px;
-    height: 32px;
-    font-size: 14px;
+    width: 28px;
+    height: 28px;
+    font-size: 16px;
   }
 }

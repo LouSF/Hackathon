@@ -2,40 +2,58 @@
 .message {
   display: flex;
   align-items: flex-end;
-  gap: 10px;
+  gap: 8px;
   animation: slideIn 0.3s ease-out;
-  margin-bottom: 4px;
+  margin-bottom: 8px;
   max-width: 100%;
 }
 
 .message-user {
   justify-content: flex-end;
+  padding-right: 4px;
 }
 
 .message-ai {
   justify-content: flex-start;
+  padding-left: 4px;
 }
 
 .ai-avatar {
-  font-size: 20px;
+  font-size: 24px;
   flex-shrink: 0;
   line-height: 1;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 50%;
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
 }
 
 .user-avatar {
-  font-size: 18px;
+  font-size: 20px;
   flex-shrink: 0;
   line-height: 1;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  border-radius: 50%;
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
 }
 
 .message-bubble {
-  max-width: 70%;
-  padding: 12px 14px;
-  border-radius: 16px;
-  font-size: 13px;
-  line-height: 1.6;
+  max-width: 65%;
+  padding: 10px 16px;
+  border-radius: 18px;
+  font-size: 14px;
+  line-height: 1.5;
   word-wrap: break-word;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  position: relative;
 }
 
 .message-bubble p {
@@ -43,16 +61,17 @@
 }
 
 .bubble-ai {
-  background: rgba(255, 255, 255, 0.95);
-  color: #333;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: #ffffff;
+  color: #1f2937;
+  border-radius: 18px 18px 18px 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.06);
 }
 
 .bubble-user {
-  background: linear-gradient(135deg, #333 0%, #1a1a1a 100%);
-  color: #fff;
-  border-radius: 16px 4px 16px 16px;
-  box-shadow: 0 2px 8px rgba(51, 51, 51, 0.2);
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  color: #ffffff;
+  border-radius: 18px 18px 4px 18px;
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3), 0 1px 2px rgba(59, 130, 246, 0.2);
 }
 
 @keyframes slideIn {

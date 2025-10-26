@@ -5,19 +5,25 @@ import Wardrobe from './components/Wardrobe';
 import AIChat from './components/AIChat';
 
 function StyleistInterface() {
-  const [feedback, setFeedback] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [isChatVisible, setIsChatVisible] = useState(true);
 
-  const handleSendFeedback = async (message: string) => {
+  const handleSendFeedback = async (message: string): Promise<void> => {
     setIsLoading(true);
-    setFeedback(message);
     // Simulate AI processing
-    return new Promise((resolve) => {
+    return new Promise<void>((resolve) => {
       setTimeout(() => {
         setIsLoading(false);
-        resolve(undefined);
+        resolve();
       }, 1500);
     });
+  };
+
+  const handleBackgroundClick = (e: React.MouseEvent) => {
+    // Check if click was on the background, not on chat
+    if ((e.target as HTMLElement).classList.contains('wardrobe-background-wrapper')) {
+      setIsChatVisible(false);
+    }
   };
 
   return (
@@ -33,17 +39,42 @@ function StyleistInterface() {
         </div>
       </header>
 
-      {/* Main Content */}
-      <main className="app-main">
-        {/* Wardrobe Section */}
-        <section className="content-section">
+      {/* Main Content - Wardrobe as full background */}
+      <main className="app-main-full">
+        <div 
+          className="wardrobe-background-wrapper"
+          onClick={handleBackgroundClick}
+        >
           <Wardrobe />
-        </section>
+        </div>
 
-        {/* AI Chat Section */}
-        <section className="content-section chat-section">
-          <AIChat onSendFeedback={handleSendFeedback} isLoading={isLoading} />
-        </section>
+        {/* Floating AI Chat */}
+        {isChatVisible && (
+          <div className="floating-chat-container">
+            <div className="chat-header-bar">
+              <span className="chat-title">💬 AI Stylist Chat</span>
+              <button 
+                className="chat-minimize-btn"
+                onClick={() => setIsChatVisible(false)}
+                title="Hide Chat"
+              >
+                ✕
+              </button>
+            </div>
+            <AIChat onSendFeedback={handleSendFeedback} isLoading={isLoading} />
+          </div>
+        )}
+
+        {/* Show Chat Button when hidden */}
+        {!isChatVisible && (
+          <button 
+            className="show-chat-btn"
+            onClick={() => setIsChatVisible(true)}
+            title="Show Chat"
+          >
+            💬
+          </button>
+        )}
       </main>
 
       {/* Background Decorations */}
