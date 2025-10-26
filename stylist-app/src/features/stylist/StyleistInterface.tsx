@@ -40,7 +40,7 @@ function StyleistInterface() {
 
   const menuItems = [
     { name: 'Home', icon: '🏠' },
-    { name: '交友', icon: '👥' },
+    { name: '社交', icon: '👥' },
     { name: '品牌价格监控', icon: '💰' },
     { name: '偏好设置', icon: '⭐' },
   ];
@@ -168,7 +168,7 @@ function StyleistInterface() {
               </button>
             )}
           </>
-        ) : currentPage === '交友' ? (
+        ) : currentPage === '社交' ? (
           <SocialPage />
         ) : currentPage === '品牌价格监控' ? (
           <BrandMonitorPage />

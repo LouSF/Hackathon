@@ -228,7 +228,7 @@ function SocialPage() {
     >
       {/* Top indicators */}
       <div className="page-indicators">
-        <div className="indicator-title">时尚交友</div>
+        <div className="indicator-title">时尚社交</div>
         <div className="user-counter">
           {currentIndex + 1} / {mockUsers.length}
         </div>
