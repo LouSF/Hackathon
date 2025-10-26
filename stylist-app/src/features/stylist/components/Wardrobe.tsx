@@ -44,6 +44,9 @@ function Wardrobe({ isChatVisible, onOutfitPanelVisibilityChange }: WardrobeProp
   const [showRecommendationModal, setShowRecommendationModal] = useState(false);
   const [hoveredOutfitItem, setHoveredOutfitItem] = useState<string | null>(null);
   const [showOutfitPanel, setShowOutfitPanel] = useState(true);
+  const [currentModel, setCurrentModel] = useState<string>('/td-1.glb');
+
+  const availableModels = ['/td-1.glb', '/td-2.glb', '/td-3.glb'];
 
   const handleLabelClick = (itemId: string) => {
     setSelectedItem(itemId);
@@ -53,6 +56,13 @@ function Wardrobe({ isChatVisible, onOutfitPanelVisibilityChange }: WardrobeProp
   const handleCloseModal = () => {
     setShowRecommendationModal(false);
     setSelectedItem(null);
+  };
+
+  const handleRandomModel = () => {
+    // Get a random model different from the current one
+    const otherModels = availableModels.filter(model => model !== currentModel);
+    const randomIndex = Math.floor(Math.random() * otherModels.length);
+    setCurrentModel(otherModels[randomIndex]);
   };
 
   return (
@@ -121,8 +131,17 @@ function Wardrobe({ isChatVisible, onOutfitPanelVisibilityChange }: WardrobeProp
         <div className="model-container">
           {/* 3D Avatar */}
           <div className="model-3d-wrapper">
-            <Avatar3D modelPath="/td-1.glb" />
+            <Avatar3D modelPath={currentModel} />
           </div>
+
+          {/* Random Model Button - Bottom Left */}
+          <button 
+            className="random-model-btn"
+            onClick={handleRandomModel}
+            title="Switch to random model"
+          >
+            🔄
+          </button>
 
           {/* Outfit Details Badge - Now opens modal */}
           <div className="outfit-badge" onClick={() => handleLabelClick('outfit')}>
