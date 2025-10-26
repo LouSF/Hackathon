@@ -29,6 +29,13 @@
   flex-direction: column;
   gap: 16px;
   overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+/* Move to left when chat is visible to avoid overlap */
+.outfit-background.chat-visible {
+  right: auto;
+  left: 24px;
 }
 
 .outfit-background-header {
@@ -184,6 +191,12 @@
   font-size: 22px;
   transition: all 0.3s ease;
   animation: popIn 0.3s ease-out;
+}
+
+/* Move to left when chat is visible */
+.show-outfit-panel-btn.chat-visible {
+  right: auto;
+  left: 24px;
 }
 
 .show-outfit-panel-btn:hover {
@@ -452,12 +465,24 @@
     padding: 16px;
   }
 
+  /* On tablet, keep outfit panel on the right even when chat is visible */
+  .outfit-background.chat-visible {
+    right: 16px;
+    left: auto;
+    width: 280px;
+  }
+
   .show-outfit-panel-btn {
     top: 16px;
     right: 16px;
     width: 44px;
     height: 44px;
     font-size: 20px;
+  }
+
+  .show-outfit-panel-btn.chat-visible {
+    right: 16px;
+    left: auto;
   }
 
   .outfit-panel-close-btn {
@@ -541,12 +566,23 @@
     padding: 14px;
   }
 
+  /* On mobile, outfit panel takes full width regardless of chat visibility */
+  .outfit-background.chat-visible {
+    right: 12px;
+    left: 12px;
+  }
+
   .show-outfit-panel-btn {
     top: 12px;
     right: 12px;
     width: 42px;
     height: 42px;
     font-size: 18px;
+  }
+
+  .show-outfit-panel-btn.chat-visible {
+    right: 12px;
+    left: auto;
   }
 
   .outfit-panel-close-btn {

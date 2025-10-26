@@ -33,7 +33,12 @@ const outfitItems: OutfitItem[] = [
   { id: '4', name: 'White Sneakers', category: 'Footwear', color: '#F5F5F5', rating: 4 },
 ];
 
-function Wardrobe() {
+interface WardrobeProps {
+  isChatVisible: boolean;
+  onOutfitPanelVisibilityChange: (visible: boolean) => void;
+}
+
+function Wardrobe({ isChatVisible, onOutfitPanelVisibilityChange }: WardrobeProps) {
   const [selectedItem, setSelectedItem] = useState<string | null>(null);
   const [showRecommendationModal, setShowRecommendationModal] = useState(false);
   const [hoveredOutfitItem, setHoveredOutfitItem] = useState<string | null>(null);
@@ -53,12 +58,12 @@ function Wardrobe() {
     <div className="wardrobe-section">
       {/* Outfit Recommendation Background */}
       {showOutfitPanel && (
-        <div className="outfit-background">
+        <div className={`outfit-background ${isChatVisible ? 'chat-visible' : ''}`}>
           <div className="outfit-background-header">
             <div className="recommendation-label">DAILY OUTFIT RECOMMENDATION</div>
             <button 
               className="outfit-panel-close-btn"
-              onClick={() => setShowOutfitPanel(false)}
+              onClick={() => { setShowOutfitPanel(false); onOutfitPanelVisibilityChange(false); }}
               title="Hide Panel"
             >
               ✕
@@ -94,8 +99,8 @@ function Wardrobe() {
       {/* Show Outfit Panel Button when hidden */}
       {!showOutfitPanel && (
         <button 
-          className="show-outfit-panel-btn"
-          onClick={() => setShowOutfitPanel(true)}
+          className={`show-outfit-panel-btn ${isChatVisible ? 'chat-visible' : ''}`}
+          onClick={() => { setShowOutfitPanel(true); onOutfitPanelVisibilityChange(true); }}
           title="Show Daily Outfit"
         >
           👔
@@ -111,7 +116,7 @@ function Wardrobe() {
       </div>
 
       {/* Model */}
-      <div className="model-area">
+      <div className={`model-area ${isChatVisible ? 'chat-visible' : ''} ${showOutfitPanel ? 'outfit-visible' : ''}`}>
         <div className="model-container">
           <div className="model-silhouette">
             {/* Head */}

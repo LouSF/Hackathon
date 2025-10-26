@@ -7,8 +7,9 @@ import AIChat from './components/AIChat';
 function StyleistInterface() {
   const [isLoading, setIsLoading] = useState(false);
   const [isChatVisible, setIsChatVisible] = useState(true);
+  const [isOutfitPanelVisible, setIsOutfitPanelVisible] = useState(true);
 
-  const handleSendFeedback = async (message: string): Promise<void> => {
+  const handleSendFeedback = async (_message: string): Promise<void> => {
     setIsLoading(true);
     // Simulate AI processing
     return new Promise<void>((resolve) => {
@@ -40,27 +41,20 @@ function StyleistInterface() {
       </header>
 
       {/* Main Content - Wardrobe as full background */}
-      <main className="app-main-full">
+      <main className={`app-main-full ${isChatVisible && isOutfitPanelVisible ? 'both-panels-visible' : ''}`}>
         <div 
           className="wardrobe-background-wrapper"
           onClick={handleBackgroundClick}
         >
-          <Wardrobe />
+          <Wardrobe 
+            isChatVisible={isChatVisible}
+            onOutfitPanelVisibilityChange={setIsOutfitPanelVisible}
+          />
         </div>
 
-        {/* Floating AI Chat */}
+        {/* AI Chat - Messages and Input on Background */}
         {isChatVisible && (
-          <div className="floating-chat-container">
-            <div className="chat-header-bar">
-              <span className="chat-title">💬 AI Stylist Chat</span>
-              <button 
-                className="chat-minimize-btn"
-                onClick={() => setIsChatVisible(false)}
-                title="Hide Chat"
-              >
-                ✕
-              </button>
-            </div>
+          <div className="chat-overlay">
             <AIChat onSendFeedback={handleSendFeedback} isLoading={isLoading} />
           </div>
         )}
@@ -73,6 +67,17 @@ function StyleistInterface() {
             title="Show Chat"
           >
             💬
+          </button>
+        )}
+
+        {/* Hide Chat Button when visible */}
+        {isChatVisible && (
+          <button 
+            className="hide-chat-btn"
+            onClick={() => setIsChatVisible(false)}
+            title="Hide Chat"
+          >
+            ✕
           </button>
         )}
       </main>

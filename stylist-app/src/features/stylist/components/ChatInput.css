@@ -42,21 +42,22 @@
 
 .chat-input-container {
   display: flex;
-  gap: 8px;
+  gap: 12px;
   align-items: center;
-  background: #ffffff;
-  border-radius: 24px;
-  padding: 8px 12px;
-  border: 2px solid #e5e7eb;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 28px;
+  padding: 10px 16px;
+  border: 2px solid rgba(0, 0, 0, 0.08);
   transition: all 0.2s ease;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
-  max-width: 600px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.08);
+  max-width: 700px;
   margin: 0 auto;
 }
 
 .chat-input-container:focus-within {
   border-color: #3b82f6;
-  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15), 0 2px 4px rgba(59, 130, 246, 0.1);
+  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.2), 0 3px 10px rgba(59, 130, 246, 0.15);
 }
 
 .chat-input {
