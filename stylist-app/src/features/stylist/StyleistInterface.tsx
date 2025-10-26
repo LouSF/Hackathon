@@ -3,6 +3,9 @@ import React, { useState, useEffect } from 'react';
 import './StyleistInterface.css';
 import Wardrobe from './components/Wardrobe';
 import AIChat from './components/AIChat';
+import SocialPage from './components/SocialPage';
+import BrandMonitorPage from './components/BrandMonitorPage';
+import PreferenceMonitorPage from './components/PreferenceMonitorPage';
 
 function StyleistInterface() {
   const [isLoading, setIsLoading] = useState(false);
@@ -122,46 +125,56 @@ function StyleistInterface() {
         </div>
       </header>
 
-      {/* Main Content - Wardrobe as full background */}
+      {/* Main Content - Different pages based on selection */}
       <main className={`app-main-full ${isChatVisible && isOutfitPanelVisible ? 'both-panels-visible' : ''}`}>
-        <div 
-          className="wardrobe-background-wrapper"
-          onClick={handleBackgroundClick}
-        >
-          <Wardrobe 
-            isChatVisible={isChatVisible}
-            onOutfitPanelVisibilityChange={setIsOutfitPanelVisible}
-          />
-        </div>
+        {currentPage === 'Home' ? (
+          <>
+            <div 
+              className="wardrobe-background-wrapper"
+              onClick={handleBackgroundClick}
+            >
+              <Wardrobe 
+                isChatVisible={isChatVisible}
+                onOutfitPanelVisibilityChange={setIsOutfitPanelVisible}
+              />
+            </div>
 
-        {/* AI Chat - Messages and Input on Background */}
-        {isChatVisible && (
-          <div className="chat-overlay">
-            <AIChat onSendFeedback={handleSendFeedback} isLoading={isLoading} />
-          </div>
-        )}
+            {/* AI Chat - Messages and Input on Background */}
+            {isChatVisible && (
+              <div className="chat-overlay">
+                <AIChat onSendFeedback={handleSendFeedback} isLoading={isLoading} />
+              </div>
+            )}
 
-        {/* Show Chat Button when hidden */}
-        {!isChatVisible && (
-          <button 
-            className="show-chat-btn"
-            onClick={() => setIsChatVisible(true)}
-            title="Show Chat"
-          >
-            💬
-          </button>
-        )}
+            {/* Show Chat Button when hidden */}
+            {!isChatVisible && (
+              <button 
+                className="show-chat-btn"
+                onClick={() => setIsChatVisible(true)}
+                title="Show Chat"
+              >
+                💬
+              </button>
+            )}
 
-        {/* Hide Chat Button when visible */}
-        {isChatVisible && (
-          <button 
-            className="hide-chat-btn"
-            onClick={() => setIsChatVisible(false)}
-            title="Hide Chat"
-          >
-            ✕
-          </button>
-        )}
+            {/* Hide Chat Button when visible */}
+            {isChatVisible && (
+              <button 
+                className="hide-chat-btn"
+                onClick={() => setIsChatVisible(false)}
+                title="Hide Chat"
+              >
+                ✕
+              </button>
+            )}
+          </>
+        ) : currentPage === '交友' ? (
+          <SocialPage />
+        ) : currentPage === '品牌价格监控' ? (
+          <BrandMonitorPage />
+        ) : currentPage === '偏好监控' ? (
+          <PreferenceMonitorPage />
+        ) : null}
       </main>
 
       {/* Background Decorations */}
